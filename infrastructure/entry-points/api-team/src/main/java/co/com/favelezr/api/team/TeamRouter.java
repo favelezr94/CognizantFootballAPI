@@ -1,4 +1,4 @@
-package co.com.favelezr.team;
+package co.com.favelezr.api.team;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -23,8 +23,8 @@ public class TeamRouter {
     @Bean
     public RouterFunction<ServerResponse> router(TeamHandler handler) {
         return RouterFunctions.route()
-                .GET(FIND, accept(APPLICATION_JSON), handler::find)
-                .GET(FIND_ALL, accept(APPLICATION_JSON), request -> handler.findAll())
+                .GET(FIND, handler::find)
+                .GET(FIND_ALL, request -> handler.findAll())
                 .POST(CREATE, accept(APPLICATION_JSON), handler::create)
                 .PUT(UPDATE, accept(APPLICATION_JSON), handler::update)
                 .DELETE(DELETE, accept(APPLICATION_JSON), handler::delete)

@@ -42,4 +42,6 @@
             <scope>runtime</scope>
         </dependency>
     </dependencies>
+
+    <packaging>jar</packaging>
 </project>

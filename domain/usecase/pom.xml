@@ -19,10 +19,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>
-        </dependency>
-        <dependency>
             <groupId>co.com.favelezr</groupId>
             <artifactId>model</artifactId>
             <version>0.0.1-SNAPSHOT</version>

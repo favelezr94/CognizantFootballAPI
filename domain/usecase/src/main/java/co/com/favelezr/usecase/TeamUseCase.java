@@ -11,8 +11,8 @@ public class TeamUseCase {
 
     private final ITeamRepository repository;
 
-    public Mono<Team> find(String name) {
-        return repository.find(name);
+    public Mono<Team> find(Long id) {
+        return repository.find(id);
     }
 
     public Flux<Team> findAll() {

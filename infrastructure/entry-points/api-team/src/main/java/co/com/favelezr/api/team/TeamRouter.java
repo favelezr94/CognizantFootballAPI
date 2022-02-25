@@ -27,7 +27,7 @@ public class TeamRouter {
                 .GET(FIND_ALL, request -> handler.findAll())
                 .POST(CREATE, accept(APPLICATION_JSON), handler::create)
                 .PUT(UPDATE, accept(APPLICATION_JSON), handler::update)
-                .DELETE(DELETE, accept(APPLICATION_JSON), handler::delete)
+                .DELETE(DELETE, handler::delete)
                 .build();
 
     }

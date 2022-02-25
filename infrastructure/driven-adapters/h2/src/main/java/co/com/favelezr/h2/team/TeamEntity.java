@@ -2,6 +2,7 @@ package co.com.favelezr.h2.team;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.relational.core.mapping.Table;
 
@@ -11,11 +12,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDate;
 
+@Builder(toBuilder = true)
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder(toBuilder = true)
 @Table("TEAM")
-public class TeamData {
+public class TeamEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

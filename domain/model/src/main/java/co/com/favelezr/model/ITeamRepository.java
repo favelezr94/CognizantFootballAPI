@@ -5,7 +5,7 @@ import reactor.core.publisher.Mono;
 
 public interface ITeamRepository {
 
-    public Mono<Team> find(Long id);
+    public Mono<Team> find(String name);
 
     public Flux<Team> findAll();
 
@@ -13,5 +13,5 @@ public interface ITeamRepository {
 
     public Mono<Team> update(Team team);
 
-    public Mono<Void> delete(Team team);
+    public Mono<Void> delete(String name);
 }

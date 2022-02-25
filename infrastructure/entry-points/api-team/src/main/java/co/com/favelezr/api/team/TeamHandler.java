@@ -11,14 +11,18 @@ import reactor.core.publisher.Mono;
 @Service
 public class TeamHandler {
 
+    private static final String NAME = "name";
     private final TeamUseCase useCase;
 
     public Mono<ServerResponse> find(ServerRequest request) {
-        return ServerResponse.ok().bodyValue("Response from Service");
+        return useCase.findByName(request.pathVariable(NAME))
+                .flatMap(response -> ServerResponse.ok().bodyValue(response));
     }
 
     public Mono<ServerResponse> findAll() {
-        return ServerResponse.ok().bodyValue("Response from Service");
+        return useCase.findAll()
+                .collectList()
+                .flatMap(response -> ServerResponse.ok().bodyValue(response));
     }
 
     public Mono<ServerResponse> create(ServerRequest request) {
@@ -30,6 +34,8 @@ public class TeamHandler {
     }
 
     public Mono<ServerResponse> delete(ServerRequest request) {
-        return ServerResponse.ok().bodyValue("Response from Service");
+        return useCase.delete(request.pathVariable(NAME))
+                .then(ServerResponse.ok().bodyValue("Team Deleted!"));
     }
+
 }

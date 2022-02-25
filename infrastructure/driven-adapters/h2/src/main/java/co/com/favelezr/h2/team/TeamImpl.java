@@ -14,32 +14,57 @@ public class TeamImpl implements ITeamRepository {
     private TeamRepository repository;
 
     @Override
-    public Mono<Team> find(Long id) {
-//        return repository.findById(id);
-        return null;
+    public Mono<Team> find(String name) {
+        return repository.findByName(name)
+                .map(this::toDTO);
     }
 
     @Override
     public Flux<Team> findAll() {
-//        return repository.findAll();
-        return null;
+        return repository.findAll()
+                .map(this::toDTO);
     }
 
     @Override
     public Mono<Team> create(Team team) {
-//        return repository.save(team);
-        return null;
+        return repository.save(toEntity(team))
+                .map(this::toDTO);
     }
 
     @Override
     public Mono<Team> update(Team team) {
-//        return repository.save(team);
-        return null;
+        return repository.save(toEntity(team))
+                .map(this::toDTO);
     }
 
     @Override
-    public Mono<Void> delete(Team team) {
-//        return repository.delete(team);
-        return null;
+    public Mono<Void> delete(String name) {
+        return repository.deleteByName(name);
+    }
+
+    private TeamEntity toEntity(Team team) {
+        return TeamEntity.builder()
+                .city(team.getCity())
+                .competition(team.getCompetition())
+                .creationDate(team.getCreationDate())
+                .name(team.getName())
+                .owner(team.getOwner())
+                .playerNumber(team.getPlayerNumber())
+                .stadiumCapacity(team.getStadiumCapacity())
+                .tier(team.getTier())
+                .build();
+    }
+
+    private Team toDTO(TeamEntity teamEntity) {
+        return Team.builder()
+                .name(teamEntity.getName())
+                .city(teamEntity.getCity())
+                .competition(teamEntity.getCompetition())
+                .creationDate(teamEntity.getCreationDate())
+                .owner(teamEntity.getOwner())
+                .playerNumber(teamEntity.getPlayerNumber())
+                .stadiumCapacity(teamEntity.getStadiumCapacity())
+                .tier(teamEntity.getTier())
+                .build();
     }
 }

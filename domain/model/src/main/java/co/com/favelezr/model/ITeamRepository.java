@@ -5,7 +5,7 @@ import reactor.core.publisher.Mono;
 
 public interface ITeamRepository {
 
-    public Mono<Team> find(String id);
+    public Mono<Team> find(Long id);
 
     public Flux<Team> findAll();
 

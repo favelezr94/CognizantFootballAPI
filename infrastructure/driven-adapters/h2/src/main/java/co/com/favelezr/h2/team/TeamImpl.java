@@ -3,6 +3,7 @@ package co.com.favelezr.h2.team;
 import co.com.favelezr.model.ITeamRepository;
 import co.com.favelezr.model.Team;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -15,31 +16,38 @@ public class TeamImpl implements ITeamRepository {
 
     @Override
     public Mono<Team> find(String name) {
-        return repository.findByName(name)
-                .map(this::toDTO);
+        return repository.findById(name)
+                .map(this::toDTO)
+                .switchIfEmpty(Mono.error(new Exception()));
     }
 
     @Override
     public Flux<Team> findAll() {
-        return repository.findAll()
+        return repository.findAllOrderByStadiumCapacity()
                 .map(this::toDTO);
     }
 
     @Override
     public Mono<Team> create(Team team) {
-        return repository.save(toEntity(team))
+        TeamEntity entity = toEntity(team);
+        entity.setNew(true);
+        return repository.save(entity)
+                .onErrorMap(DataIntegrityViolationException.class, Exception::new)
                 .map(this::toDTO);
     }
 
     @Override
     public Mono<Team> update(Team team) {
-        return repository.save(toEntity(team))
+        TeamEntity entity = toEntity(team);
+        entity.setNew(false);
+        return repository.save(entity)
                 .map(this::toDTO);
     }
 
     @Override
     public Mono<Void> delete(String name) {
-        return repository.deleteByName(name);
+        return repository.deleteById(name)
+                .onErrorMap(err -> new Exception(err));
     }
 
     private TeamEntity toEntity(Team team) {

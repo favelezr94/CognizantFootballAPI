@@ -35,7 +35,7 @@ public class TeamImpl implements ITeamRepository {
     }
 
     @Override
-    public Mono<Team> create(Team team) {
+    public Mono<Team> save(Team team) {
         log.info("Creating team: {}", team);
         TeamEntity entity = toEntity(team);
         entity.setNew(true);

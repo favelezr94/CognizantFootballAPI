@@ -13,7 +13,6 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
-import java.util.Collections;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -21,6 +20,8 @@ import java.util.List;
 public class TeamHandler {
 
     private static final String NAME = "name";
+    private static final String SUCCESS = "Success";
+    private static final String ERROR = "Error";
     private final RequestValidator validator;
     private final TeamUseCase useCase;
 
@@ -37,10 +38,10 @@ public class TeamHandler {
                 .flatMap(response -> ServerResponse.ok().bodyValue(buildSuccessResponse(response)));
     }
 
-    public Mono<ServerResponse> create(ServerRequest request) {
+    public Mono<ServerResponse> save(ServerRequest request) {
         return request.bodyToMono(TeamDTO.class)
                 .flatMap(validator::isValidBody)
-                .flatMap(useCase::create)
+                .flatMap(useCase::save)
                 .flatMap(response -> ServerResponse.ok().bodyValue(buildSuccessResponse(response)))
                 .onErrorResume(RepositoryException.class,
                         exception -> ServerResponse.badRequest().bodyValue(buildErrorResponse(exception)));
@@ -57,9 +58,11 @@ public class TeamHandler {
 
     public Mono<ServerResponse> delete(ServerRequest request) {
         return useCase.delete(request.pathVariable(NAME))
-                .flatMap(response -> ServerResponse.ok().bodyValue(buildSuccessResponse(response)))
+                .flatMap(response -> ServerResponse.ok().
+                        bodyValue(new DeleteResponse(SUCCESS, request.pathVariable(NAME))))
                 .onErrorResume(RepositoryException.class,
-                        exception -> ServerResponse.badRequest().bodyValue(buildErrorResponse(exception)));
+                        exception -> ServerResponse.badRequest()
+                                .bodyValue(new DeleteResponse(ERROR, request.pathVariable(NAME))));
     }
 
     private ErrorResponse buildErrorResponse(RepositoryException exception) {
@@ -77,14 +80,13 @@ public class TeamHandler {
 
     private SuccessResponse buildSuccessResponse(List<Team> response) {
         return SuccessResponse.builder()
-                .data(Collections.singletonList(response))
+                .data(response)
                 .build();
     }
 
-    private SuccessResponse buildSuccessResponse(String response) {
-        return SuccessResponse.builder()
-                .data(List.of(response))
-                .build();
+    @RequiredArgsConstructor
+    static class DeleteResponse {
+        private final String status;
+        private final String name;
     }
-
 }

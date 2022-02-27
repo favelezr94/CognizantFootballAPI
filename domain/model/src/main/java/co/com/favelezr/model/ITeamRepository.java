@@ -9,7 +9,7 @@ public interface ITeamRepository {
 
     public Flux<Team> findAll();
 
-    public Mono<Team> create(Team team);
+    public Mono<Team> save(Team team);
 
     public Mono<Team> update(Team team);
 

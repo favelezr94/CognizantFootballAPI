@@ -60,6 +60,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>football-team-management-service</finalName>
     </build>
 
 </project>

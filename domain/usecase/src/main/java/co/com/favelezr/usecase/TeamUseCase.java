@@ -19,8 +19,8 @@ public class TeamUseCase {
         return repository.findAll();
     }
 
-    public Mono<Team> create(Team team) {
-        return repository.create(team);
+    public Mono<Team> save(Team team) {
+        return repository.save(team);
     }
 
     public Mono<Team> update(Team team) {

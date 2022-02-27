@@ -1,0 +1,8 @@
+/Users/favelezr/Documents/LocalDev/football-team-management-system/infrastructure/entry-points/api-team/src/main/java/co/com/favelezr/api/team/validator/TierCapacityMapping.java
+/Users/favelezr/Documents/LocalDev/football-team-management-system/infrastructure/entry-points/api-team/src/main/java/co/com/favelezr/api/team/responses/SuccessResponse.java
+/Users/favelezr/Documents/LocalDev/football-team-management-system/infrastructure/entry-points/api-team/src/main/java/co/com/favelezr/api/team/TeamOpenAPI.java
+/Users/favelezr/Documents/LocalDev/football-team-management-system/infrastructure/entry-points/api-team/src/main/java/co/com/favelezr/api/team/validator/TeamDTO.java
+/Users/favelezr/Documents/LocalDev/football-team-management-system/infrastructure/entry-points/api-team/src/main/java/co/com/favelezr/api/team/responses/ErrorResponse.java
+/Users/favelezr/Documents/LocalDev/football-team-management-system/infrastructure/entry-points/api-team/src/main/java/co/com/favelezr/api/team/TeamHandler.java
+/Users/favelezr/Documents/LocalDev/football-team-management-system/infrastructure/entry-points/api-team/src/main/java/co/com/favelezr/api/team/TeamRouter.java
+/Users/favelezr/Documents/LocalDev/football-team-management-system/infrastructure/entry-points/api-team/src/main/java/co/com/favelezr/api/team/validator/RequestValidator.java

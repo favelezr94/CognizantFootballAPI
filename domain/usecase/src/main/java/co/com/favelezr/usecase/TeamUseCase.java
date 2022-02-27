@@ -27,7 +27,7 @@ public class TeamUseCase {
         return repository.update(team);
     }
 
-    public Mono<Void> delete(String name) {
+    public Mono<String> delete(String name) {
         return repository.delete(name);
     }
 

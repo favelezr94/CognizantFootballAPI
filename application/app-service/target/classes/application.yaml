@@ -1,3 +1,9 @@
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG
+    root: INFO
 spring:
   h2.console:
     enabled: true

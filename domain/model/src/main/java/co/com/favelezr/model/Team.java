@@ -2,7 +2,6 @@ package co.com.favelezr.model;
 
 import lombok.Builder;
 import lombok.Data;
-
 import java.time.LocalDate;
 
 @Data

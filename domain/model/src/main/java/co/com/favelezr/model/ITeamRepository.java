@@ -13,5 +13,5 @@ public interface ITeamRepository {
 
     public Mono<Team> update(Team team);
 
-    public Mono<Void> delete(String name);
+    public Mono<String> delete(String name);
 }

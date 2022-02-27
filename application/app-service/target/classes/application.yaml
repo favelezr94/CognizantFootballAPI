@@ -1,5 +1,10 @@
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG
+    root: INFO
 spring:
   h2.console:
     enabled: true
-    path: /h2-console
-    port: 8082
+    port: 8081
